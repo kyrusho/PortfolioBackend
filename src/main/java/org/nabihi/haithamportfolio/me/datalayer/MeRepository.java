@@ -8,3 +8,4 @@ import reactor.core.publisher.Mono;
 public interface MeRepository extends ReactiveMongoRepository<Me, String> {
     Mono<Me> findMeByMeId(String meId);
 }
+

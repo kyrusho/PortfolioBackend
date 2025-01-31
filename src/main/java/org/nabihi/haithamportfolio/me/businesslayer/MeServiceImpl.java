@@ -2,7 +2,7 @@ package org.nabihi.haithamportfolio.me.businesslayer;
 
 import org.nabihi.haithamportfolio.me.datalayer.MeRepository;
 import org.nabihi.haithamportfolio.me.presentationlayer.MeResponseModel;
-import org.nabihi.haithamportfolio.me.utils.EntityDTOUtil;
+import org.nabihi.haithamportfolio.utils.EntityDTOUtil;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 
