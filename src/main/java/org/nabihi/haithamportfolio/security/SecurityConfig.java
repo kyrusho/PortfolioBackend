@@ -85,7 +85,7 @@ public class SecurityConfig {
     @Bean
     public UrlBasedCorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration corsConfig = new CorsConfiguration();
-        corsConfig.addAllowedOrigin("http://localhost:3000");
+        corsConfig.addAllowedOrigin("https://haithamportfolio-gxtfe.ondigitalocean.app/");
         corsConfig.addAllowedOrigin("https://dev-3bhgduaasaz1xonw.us.auth0.com/");
         corsConfig.addAllowedHeader("*");
         corsConfig.addAllowedMethod("*");
