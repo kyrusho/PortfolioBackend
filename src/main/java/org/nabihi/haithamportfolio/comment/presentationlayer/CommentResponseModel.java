@@ -16,4 +16,5 @@ public class CommentResponseModel {
     private String author;
     private String content;
     private LocalDateTime dateSubmitted;
+    private boolean approved;
 }

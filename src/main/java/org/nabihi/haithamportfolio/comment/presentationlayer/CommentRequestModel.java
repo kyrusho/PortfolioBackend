@@ -14,5 +14,4 @@ import java.time.LocalDateTime;
 public class CommentRequestModel {
     private String author;
     private String content;
-    private LocalDateTime dateSubmitted; // Will be set in the service layer
 }

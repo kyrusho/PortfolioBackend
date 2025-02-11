@@ -7,6 +7,8 @@ services:
       - "8888:8888"
     environment:
       - SPRING_PROFILES_ACTIVE=docker
+      - AUTH0_CLIENT_ID=n95rvXcxkIKA2AvbpSRsq6qtO1AfNmz8
+      - AUTH0_CLIENT_SECRET=8LiVL-8zJnCfyl0wt33DiZcxabzEkVfzFnLt3CxQLMtQL4eZyGu-99xbcsheR_1s
     depends_on:
       - mongodb
       
