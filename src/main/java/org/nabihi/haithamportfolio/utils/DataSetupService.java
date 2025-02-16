@@ -115,7 +115,7 @@ public class DataSetupService implements CommandLineRunner {
         );
 
         Flux.just(project1, project2, project3)
-                .flatMap(project -> projectRepository.findByProjectId(project.getProjectId())
+                .flatMap(project -> projectRepository.findProjectByProjectId(project.getProjectId())
                         .switchIfEmpty(Mono.defer(() -> {
                             System.out.println("Inserting project: " + project.getProjectId());
                             return projectRepository.save(project);
