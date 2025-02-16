@@ -16,6 +16,8 @@ import org.nabihi.haithamportfolio.skill.presentationlayer.SkillResponseModel;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 
+import java.util.UUID;
+
 @Component
 @RequiredArgsConstructor
 public class EntityDTOUtil {
@@ -49,12 +51,18 @@ public class EntityDTOUtil {
     // Convert SkillRequestModel DTO to Skill entity
     public static Project toProjectEntity(ProjectRequestModel request) {
         return Project.builder()
+                .projectId(generateOrderIdString())
                 .projectName(request.getProjectName())
                 .iconUrl(request.getIconUrl())
                 .gitRepo(request.getGitRepo())
                 .skills(request.getSkills())
                 .build();
     }
+
+    public static String generateOrderIdString() {
+        return UUID.randomUUID().toString();
+    }
+
 
     public static SkillResponseModel toSkillResponseModel(Skill skill) {
         SkillResponseModel skillResponseModel  = new SkillResponseModel();

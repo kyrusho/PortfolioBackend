@@ -86,7 +86,7 @@ public class DataSetupService implements CommandLineRunner {
         );
 
         Project project2 = buildProject(
-                "projectId1",
+                "projectId2",
                 "Champlain PetClinic",
                 "https://i.postimg.cc/nzRd0fGy/champlain-Pet-Clinic.png",
                 "https://github.com/cgerard321/champlain_petclinic",
