@@ -31,14 +31,14 @@ public class ProjectServiceImpl implements ProjectService {
         return projectRequestModel
                 .map(EntityDTOUtil::toProjectEntity)
                 .flatMap(projectRepository::insert)
-                .flatMap(savedProject-> projectRepository.findByProjectId(savedProject.getProjectId()))
+                .flatMap(savedProject-> projectRepository.findProjectByProjectId(savedProject.getProjectId()))
                 .map(EntityDTOUtil::toProjectResponseModel);
 
     }
 
     @Override
     public Mono<ProjectResponseModel> EditProject(Mono<ProjectRequestModel> projectRequestModel, String projectId) {
-        return projectRepository.findByProjectId(projectId)
+        return projectRepository.findProjectByProjectId(projectId)
                 .flatMap(existingProject -> projectRequestModel.map(requestModel->{
                     existingProject.setProjectName(requestModel.getProjectName());
                     existingProject.setIconUrl(requestModel.getIconUrl());
@@ -52,8 +52,15 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
+    public Mono<Void> deleteProject(String projectId) {
+        return projectRepository.findProjectByProjectId(projectId)
+                .switchIfEmpty(Mono.error(new NotFoundException("Re with ID '" + projectId + "' not found.")))
+                .flatMap(projectRepository::delete);
+    }
+
+    @Override
     public Mono<ProjectResponseModel> GetProject(String projectId) {
-        return projectRepository.findByProjectId(projectId).map(EntityDTOUtil::toProjectResponseModel);
+        return projectRepository.findProjectByProjectId(projectId).map(EntityDTOUtil::toProjectResponseModel);
     }
 
 }

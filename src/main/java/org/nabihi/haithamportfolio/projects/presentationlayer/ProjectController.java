@@ -2,6 +2,9 @@ package org.nabihi.haithamportfolio.projects.presentationlayer;
 
 import org.nabihi.haithamportfolio.projects.businesslayer.ProjectService;
 import org.nabihi.haithamportfolio.projects.datalayer.Project;
+import org.nabihi.haithamportfolio.utils.exceptions.NotFoundException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
@@ -25,7 +28,7 @@ public class ProjectController {
         return projectService.getAllProjects();
     }
 
-    
+
     @PostMapping()
     Mono<ProjectResponseModel> addProject(@RequestBody Mono<ProjectRequestModel> projectRequestModel) {
         return projectService.AddProject(projectRequestModel);
@@ -39,6 +42,13 @@ public class ProjectController {
     @GetMapping("/{projectId}")
     Mono<ProjectResponseModel> getProjectById(@PathVariable String projectId) {
         return projectService.GetProject(projectId);
+    }
+
+    @DeleteMapping("/{projectId}")
+    public Mono<ResponseEntity<Void>> deleteProject(@PathVariable String projectId) {
+        return projectService.deleteProject(projectId)
+                .then(Mono.just(new ResponseEntity<Void>(HttpStatus.NO_CONTENT)))
+                .onErrorResume(NotFoundException.class, e -> Mono.just(new ResponseEntity<Void>(HttpStatus.NOT_FOUND)));
     }
 }
 
